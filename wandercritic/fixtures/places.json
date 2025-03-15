@@ -1,0 +1,334 @@
+{
+    "places": [
+        {
+            "name": "National Museum of Scotland",
+            "description": "The National Museum of Scotland is a museum in Edinburgh, Scotland. It is the largest museum in the country and is home to a wide range of exhibitions and collections.",
+            "short_description": "Largest museum in Scotland",
+            "location": "Edinburgh, Scotland",
+            "category": "Museum",
+            "tags": ["museum", "scotland", "architecture"],
+            "highlights": [
+                "Many exhibitions",
+                "Nice cafe",
+                "Rooftop views"
+            ],
+            "best_time_to_visit": "All year round",
+            "getting_there": "Walkable from the centre of Edinburgh",
+            "tips": [
+                "Free entry so no need to book.",
+                "Visit early morning or late evening to avoid crowds",
+                "Plan which exhibitions you would like to see."
+            ],
+            "budget": 5.00,
+            "image_url": "https://images.pexels.com/photos/58599/pexels-photo-58599.jpeg?auto=compress&cs=tinysrgb&w=1200"
+        },
+        {
+            "name": "Kelvingrove Art Gallery and Museum",
+            "description": "The Kelvingrove Art Gallery and Museum is a gallery and museum in Glasgow, Scotland. It is home to a wide range of exhibitions and collections.",
+            "short_description": "Art gallery and museum in Glasgow",
+            "location": "Glasgow, Scotland",
+            "category": "Museum",
+            "tags": ["museum", "scotland", "art"],
+            "highlights": [
+                "Stunning Architecture",
+                "Historic significance",
+                "Nice cafe"
+            ],
+            "best_time_to_visit": "Early morning or late afternoon",
+            "getting_there": "Easy to get to by Glasgow subway",
+            "tips": [
+                "Free entry so no need to book.",
+                "Visit during off-peak hours",
+                "Wear comfortable shoes"
+            ],
+            "budget": 5.00,
+            "image_url": "https://images.pexels.com/photos/15511452/pexels-photo-15511452/free-photo-of-interior-of-the-kelvingrove-art-gallery-and-museum-in-glasgow-scotland.jpeg?auto=compress&cs=tinysrgb&w=1200"
+        },
+        {
+            "name": "Isle of Skye",
+            "description": "The Isle of Skye is a small island in the Scottish Highlands, known for its dramatic landscapes, rugged coastline, and rich history.",
+            "short_description": "Island in the Scottish Highlands",
+            "location": "Skye, Scotland",
+            "category": "Island",
+            "tags": ["island", "scotland", "nature"],
+            "highlights": [
+                "Breathtaking views",
+                "Local businesses",
+                "Hiking opportunities"
+            ],
+            "best_time_to_visit": "Spring (April to May) or Summer (June to August)",
+            "getting_there": "Bus from Edinburgh or Glasgow to Skye",
+            "tips": [
+                "Choose less crowded areas",
+                "Wear proper hiking gear",
+                "Start early in the morning"
+            ],
+            "budget": 50.00,
+            "image_url": "https://images.pexels.com/photos/39391/landscape-nature-mountains-road-39391.jpeg?auto=compress&cs=tinysrgb&w=1200"
+        },
+        {
+            "name": "Loch Ness",
+            "description": "Loch Ness is a large, deep freshwater lake in the Scottish Highlands. It is famous for the legendary Loch Ness Monster and its stunning natural beauty.",
+            "short_description": "Scotland's most famous loch",
+            "location": "Inverness-shire, Scotland",
+            "category": "Natural Attraction",
+            "tags": ["nature", "scotland", "water"],
+            "highlights": [
+                "Nessie sightings",
+                "Beautiful scenery",
+                "Historic castles"
+            ],
+            "best_time_to_visit": "Spring (April to May) or Summer (June to August)",
+            "getting_there": "Drive from Inverness or take a tour bus",
+            "tips": [
+                "Book boat tours in advance",
+                "Bring warm clothing",
+                "Visit Urquhart Castle"
+            ],
+            "budget": 30.00,
+            "image_url": "https://images.pexels.com/photos/5662219/pexels-photo-5662219.jpeg?auto=compress&cs=tinysrgb&w=1200"
+        },
+        {
+            "name": "Ben Nevis",
+            "description": "Ben Nevis is the highest mountain in the British Isles, located in the Grampian Mountains in Scotland. It offers challenging hikes and stunning views from the summit.",
+            "short_description": "Highest mountain in the UK",
+            "location": "Fort William, Scotland",
+            "category": "Mountain",
+            "tags": ["hiking", "scotland", "nature"],
+            "highlights": [
+                "Panoramic views",
+                "Challenging hike",
+                "Mountain railway"
+            ],
+            "best_time_to_visit": "Summer (June to August) or Autumn (September to November)",
+            "getting_there": "Drive from Fort William or take a bus",
+            "tips": [
+                "Check weather conditions",
+                "Wear proper hiking gear",
+                "Start early in the morning"
+            ],
+            "budget": 20.00,
+            "image_url": "https://images.pexels.com/photos/19897491/pexels-photo-19897491/free-photo-of-ben-nevis-with-a-moody-sky-fort-william-scotland.jpeg?auto=compress&cs=tinysrgb&w=1200"
+        },
+        {
+            "name": "Stirling Castle",
+            "description": "Stirling Castle is one of the largest and most important castles in Scotland. It played a significant role in Scottish history and offers stunning views of the surrounding landscape.",
+            "short_description": "Historic Scottish castle",
+            "location": "Stirling, Scotland",
+            "category": "Historical Site",
+            "tags": ["history", "scotland", "castle"],
+            "highlights": [
+                "Royal apartments",
+                "Great Hall",
+                "Battlefield views"
+            ],
+            "best_time_to_visit": "Spring (April to May) or Autumn (September to November)",
+            "getting_there": "Drive from Edinburgh or Glasgow or take a train to Stirling",
+            "tips": [
+                "Book tickets online to skip lines",
+                "Wear comfortable shoes",
+                "Visit the nearby Wallace Monument"
+            ],
+            "budget": 15.00,
+            "image_url": "https://images.pexels.com/photos/29969336/pexels-photo-29969336/free-photo-of-aerial-view-of-stirling-castle-in-scotland.jpeg?auto=compress&cs=tinysrgb&w=1200"
+        },
+        {
+            "name": "St Andrews",
+            "description": "St Andrews is a historic university town on the east coast of Scotland, famous for its medieval cathedral ruins, golf courses, and beautiful beaches.",
+            "short_description": "Historic university town",
+            "location": "Fife, Scotland",
+            "category": "Town",
+            "tags": ["history", "scotland", "golf"],
+            "highlights": [
+                "Old Course golf",
+                "Medieval cathedral",
+                "Beautiful beaches"
+            ],
+            "best_time_to_visit": "Spring (April to May) or Autumn (September to November)",
+            "getting_there": "Drive from Edinburgh or take a train to St Andrews",
+            "tips": [
+                "Visit the golf museum",
+                "Explore the castle ruins",
+                "Try the local seafood"
+            ],
+            "budget": 25.00,
+            "image_url": "https://images.pexels.com/photos/9312570/pexels-photo-9312570.jpeg?auto=compress&cs=tinysrgb&w=1200"
+        },
+        {
+            "name": "Inverness Castle",
+            "description": "Inverness Castle is a 19th-century castle in Inverness, Scotland. It sits on a hill overlooking the River Ness and offers stunning views of the city.",
+            "short_description": "Castle overlooking River Ness",
+            "location": "Inverness, Scotland",
+            "category": "Historical Site",
+            "tags": ["history", "scotland", "castle"],
+            "highlights": [
+                "River views",
+                "City center location",
+                "Historic significance"
+            ],
+            "best_time_to_visit": "All year round",
+            "getting_there": "Walkable from Inverness city center",
+            "tips": [
+                "Visit the museum",
+                "Take a river cruise",
+                "Explore the surrounding gardens"
+            ],
+            "budget": 10.00,
+            "image_url": "https://images.pexels.com/photos/5013612/pexels-photo-5013612.jpeg?auto=compress&cs=tinysrgb&w=1200"
+        },
+        {
+            "name": "Cairngorms National Park",
+            "description": "The Cairngorms National Park is the largest national park in the UK, covering a vast area of mountains, forests, and rivers in the Scottish Highlands.",
+            "short_description": "Largest national park in the UK",
+            "location": "Scottish Highlands, Scotland",
+            "category": "National Park",
+            "tags": ["nature", "scotland", "outdoor"],
+            "highlights": [
+                "Mountain hiking",
+                "Wildlife watching",
+                "Winter sports"
+            ],
+            "best_time_to_visit": "Summer (June to August) or Winter (December to February)",
+            "getting_there": "Drive from Aberdeen or Inverness",
+            "tips": [
+                "Check weather conditions",
+                "Wear proper outdoor gear",
+                "Visit the Cairngorm Reindeer Centre"
+            ],
+            "budget": 40.00,
+            "image_url": "https://images.pexels.com/photos/29733935/pexels-photo-29733935/free-photo-of-aerial-view-of-snow-covered-cairngorm-mountains.jpeg?auto=compress&cs=tinysrgb&w=1200"
+        },
+        {
+            "name": "John o' Groats",
+            "description": "John o' Groats is a village at the northernmost point of mainland Scotland, famous for its stunning coastal views and being the traditional starting point for the Land's End to John o' Groats journey.",
+            "short_description": "Northernmost point of mainland Scotland",
+            "location": "Caithness, Scotland",
+            "category": "Village",
+            "tags": ["coast", "scotland", "landmark"],
+            "highlights": [
+                "Coastal views",
+                "Land's End to John o' Groats",
+                "Ferry to Orkney"
+            ],
+            "best_time_to_visit": "Summer (June to August)",
+            "getting_there": "Drive from Inverness or Thurso",
+            "tips": [
+                "Visit the visitor center",
+                "Take a coastal walk",
+                "Plan for ferry crossings"
+            ],
+            "budget": 20.00,
+            "image_url": "https://images.pexels.com/photos/17364074/pexels-photo-17364074/free-photo-of-a-distance-sign-at-a-port-in-john-ogroats-scotland.jpeg?auto=compress&cs=tinysrgb&w=1200"
+        },
+        {
+            "name": "Glencoe",
+            "description": "Glencoe is a mountain glen in the Scottish Highlands, renowned for its dramatic landscapes, tragic history, and outdoor activities. The area is surrounded by towering mountains and offers stunning views of the surrounding countryside.",
+            "short_description": "Dramatic mountain glen",
+            "location": "Argyll and Bute, Scotland",
+            "category": "Natural Attraction",
+            "tags": ["nature", "scotland", "hiking"],
+            "highlights": [
+                "Mountain hiking",
+                "Historic significance",
+                "Stunning views"
+            ],
+            "best_time_to_visit": "Spring (April to May) or Autumn (September to November)",
+            "getting_there": "Drive from Glasgow or Fort William",
+            "tips": [
+                "Check weather conditions",
+                "Wear proper hiking gear",
+                "Visit the Glencoe Visitor Centre"
+            ],
+            "budget": 30.00,
+            "image_url": "https://images.pexels.com/photos/31083554/pexels-photo-31083554/free-photo-of-majestic-scottish-highlands-mountain-landscape.jpeg?auto=compress&cs=tinysrgb&w=1200"
+        },
+        {
+            "name": "The Kelpies",
+            "description": "The Kelpies are a pair of 30-meter-tall horse head sculptures located in Falkirk, Scotland. They are the largest equine sculptures in the world and are part of the Helix Park project.",
+            "short_description": "Giant horse head sculptures",
+            "location": "Falkirk, Scotland",
+            "category": "Landmark",
+            "tags": ["art", "scotland", "sculpture"],
+            "highlights": [
+                "Impressive scale",
+                "Light shows",
+                "Walking trails"
+            ],
+            "best_time_to_visit": "All year round",
+            "getting_there": "Drive from Edinburgh or Glasgow or take a train to Falkirk",
+            "tips": [
+                "Visit during a light show",
+                "Explore the surrounding park",
+                "Check for special events"
+            ],
+            "budget": 15.00,
+            "image_url": "https://images.pexels.com/photos/23857069/pexels-photo-23857069/free-photo-of-the-kelpies-sculpture-in-the-helix.jpeg?auto=compress&cs=tinysrgb&w=1200"
+        },
+        {
+            "name": "Pollock Park",
+            "description": "Pollock Park is a large public park in Glasgow, Scotland. It features beautiful gardens, a loch, and the historic Pollock House. The park offers various activities including boating, fishing, and walking trails.",
+            "short_description": "Large public park in Glasgow",
+            "location": "Glasgow, Scotland",
+            "category": "Park",
+            "tags": ["nature", "scotland", "outdoor"],
+            "highlights": [
+                "Highland Cows",
+                "Historic Pollock House",
+                "Walking trails"
+            ],
+            "best_time_to_visit": "Spring (April to May) or Summer (June to August)",
+            "getting_there": "Drive from Glasgow city center or take a bus",
+            "tips": [
+                "Visit the house and art collection",
+                "Take a boat ride on the loch",
+                "Explore the gardens"
+            ],
+            "budget": 10.00,
+            "image_url": "https://images.pexels.com/photos/4034837/pexels-photo-4034837.jpeg?auto=compress&cs=tinysrgb&w=1200"
+        },
+        {
+            "name": "Arthur's Seat",
+            "description": "Arthur's Seat is the highest point in Edinburgh's Holyrood Park, offering stunning panoramic views of the city. It's a popular spot for hiking and outdoor activities, with several trails leading to the summit.",
+            "short_description": "Highest point in Edinburgh",
+            "location": "Edinburgh, Scotland",
+            "category": "Mountain",
+            "tags": ["hiking", "scotland", "views"],
+            "highlights": [
+                "Panoramic city views",
+                "Easy hiking trails",
+                "Historic significance"
+            ],
+            "best_time_to_visit": "Spring (April to May) or Autumn (September to November)",
+            "getting_there": "Walkable from Edinburgh city center",
+            "tips": [
+                "Start early in the morning",
+                "Wear comfortable shoes",
+                "Check weather conditions"
+            ],
+            "budget": 5.00,
+            "image_url": "https://images.pexels.com/photos/30341463/pexels-photo-30341463/free-photo-of-historic-edinburgh-architecture-with-arthur-s-seat.jpeg?auto=compress&cs=tinysrgb&w=1200"
+        },
+        {
+            "name": "Holyrood Palace",
+            "description": "Holyrood Palace is the official residence of the British monarch in Scotland. It's located at the end of the Royal Mile in Edinburgh and features beautiful gardens and historic apartments.",
+            "short_description": "Official Scottish residence of the monarch",
+            "location": "Edinburgh, Scotland",
+            "category": "Historical Site",
+            "tags": ["history", "scotland", "palace"],
+            "highlights": [
+                "Royal apartments",
+                "Beautiful gardens",
+                "Historic significance"
+            ],
+            "best_time_to_visit": "Spring (April to May) or Autumn (September to November)",
+            "getting_there": "Walkable from Edinburgh city center",
+            "tips": [
+                "Book tickets online to skip lines",
+                "Visit during the Changing of the Guard",
+                "Explore the gardens"
+            ],
+            "budget": 20.00,
+            "image_url": "https://images.pexels.com/photos/14905419/pexels-photo-14905419.jpeg?auto=compress&cs=tinysrgb&w=1200"
+        }
+    ]
+}

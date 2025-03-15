@@ -1,0 +1,52 @@
+{% extends 'wandercritic/base.html' %}
+{% load static %}
+
+{% block content %}
+<!-- Main Content -->
+<section class="main-content">
+    <div class="container">
+        <div class="card">
+            <div class="card-body">
+                {% if place %}
+                    <h1 class="h2">Report {{ place.name }}</h1>
+                    <p class="text-muted">Use this form to report any issues with this place listing.</p>
+                {% else %}
+                    <h1 class="h2">Submit a Report</h1>
+                    <p class="text-muted">Use this form to report inappropriate content or technical issues.</p>
+                {% endif %}
+                
+                <form method="post">
+                    {% csrf_token %}
+                    
+                    {% if form.non_field_errors %}
+                    <div class="alert alert-danger">
+                        {% for error in form.non_field_errors %}
+                            {{ error }}
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                    
+                    {% for field in form %}
+                    <div class="form-group">
+                        <label for="{{ field.id_for_label }}" class="control-label">{{ field.label }}</label>
+                        {{ field }}
+                        {% if field.help_text %}
+                            <small class="form-text text-muted">{{ field.help_text }}</small>
+                        {% endif %}
+                        {% if field.errors %}
+                            <div class="alert alert-danger">
+                                {% for error in field.errors %}
+                                    {{ error }}
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                    
+                    <button type="submit" class="btn btn-primary">Submit Report</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

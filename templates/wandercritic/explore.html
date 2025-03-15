@@ -1,0 +1,262 @@
+{% extends 'wandercritic/base.html' %}
+{% load static %}
+
+{% block content %}
+<!-- Search Section -->
+<section class="search-section" style="background-image: url('{% static "assets/Explore_banner.jpeg" %}');">
+    <div class="search-overlay">
+        <div class="search-container">
+            <h1>Explore Scotland's Hidden Gems</h1>
+            <p>Discover breathtaking landscapes, historic castles, and unforgettable experiences</p>
+            <form method="get" action="{% url 'wandercritic:explore' %}" class="search-form">
+                <div class="search-box">
+                    <input type="text" name="search" class="search-input" placeholder="Search for places..." value="{{ search_query }}">
+                    <button type="submit" class="btn btn-primary">Search</button>
+                </div>
+                <div class="filters">
+                    <select name="category" class="filter-select" onchange="this.form.submit()">
+                        <option value="">All Categories</option>
+                        {% for category in categories %}
+                            <option value="{{ category.name }}" {% if selected_category == category.name %}selected{% endif %}>
+                                {{ category.name }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                    <select name="tag" class="filter-select" onchange="this.form.submit()">
+                        <option value="">All Tags</option>
+                        {% for tag in tags %}
+                            <option value="{{ tag.name }}" {% if selected_tag == tag.name %}selected{% endif %}>
+                                {{ tag.name }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                    <select name="budget_range" class="filter-select" onchange="this.form.submit()">
+                        <option value="">All Budgets</option>
+                        {% for range_value, range_display in budget_ranges %}
+                            <option value="{{ range_value }}" {% if selected_budget_range == range_value %}selected{% endif %}>
+                                {{ range_display }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                    {% if search_query or selected_category or selected_tag %}
+                        <a href="{% url 'wandercritic:explore' %}" class="btn btn-outline-light">Clear Filters</a>
+                    {% endif %}
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+
+<!-- Places Section -->
+<section class="main-content">
+    <h2>Popular Destinations</h2>
+    <div class="places-grid">
+        {% for place in places %}
+        <a href="{% url 'wandercritic:place_detail' place.slug %}" class="place-card">
+            {% if place.image %}
+                <img src="{{ place.image.url }}" alt="{{ place.name }}">
+            {% else %}
+                <img src="{% static 'assets/Landscape/placeholder.jpg' %}" alt="Placeholder">
+            {% endif %}
+            <div class="place-content">
+                <h3>{{ place.name }}</h3>
+                <div class="rating">
+                    {% with ''|center:place.average_rating as stars %}
+                        {% for _ in stars %}<i class="fas fa-star"></i>{% endfor %}
+                    {% endwith %}
+                    <span class="rating-text">{{ place.average_rating|floatformat:1 }}/5 ({{ place.total_ratings }} review{{ place.total_ratings|pluralize }})</span>
+                </div>
+                <div class="place-meta">
+                    <p class="location"><i class="fas fa-map-marker-alt"></i> {{ place.location }}</p>
+                    <p class="agent"><i class="fas fa-user"></i> {{ place.created_by.get_full_name }}</p>
+                </div>
+                <p class="description">{{ place.short_description }}</p>
+            </div>
+        </a>
+        {% empty %}
+        <div class="no-places">
+            <p>No places found. Be the first to add one!</p>
+            {% if user.is_travel_agent %}
+                <a href="{% url 'wandercritic:place_create' %}" class="btn btn-primary">Add Place</a>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+<style>
+    .search-section {
+        background-size: cover;
+        background-position: center;
+        padding: 6rem 2rem;
+        position: relative;
+        margin-top: 74px;
+    }
+    
+    .search-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .search-container {
+        max-width: 800px;
+        width: 100%;
+        padding: 2rem;
+        z-index: 1;
+        text-align: center;
+        color: white;
+    }
+
+    .search-box {
+        display: flex;
+        gap: 1rem;
+        margin-top: 2rem;
+    }
+
+    .search-input {
+        flex: 1;
+        padding: 1rem;
+        border: none;
+        border-radius: 4px;
+        font-size: 1rem;
+    }
+
+    .filters {
+        display: flex;
+        gap: 1rem;
+        margin-top: 1rem;
+        justify-content: center;
+    }
+
+    .filter-select {
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        border: 1px solid white;
+        background: rgba(255, 255, 255, 0.1);
+        color: white;
+        cursor: pointer;
+        min-width: 150px;
+    }
+
+    .filter-select option {
+        background: #fff;
+        color: #333;
+    }
+
+
+
+    .btn-outline-light {
+        background: transparent;
+        border: 1px solid white;
+        color: white;
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        text-decoration: none;
+        transition: all 0.3s ease;
+    }
+
+    .btn-outline-light:hover {
+        background: white;
+        color: black;
+    }
+
+    .places-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 2rem;
+        padding: 2rem;
+    }
+
+    .place-card {
+        background: white;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        transition: transform 0.2s;
+        text-decoration: none;
+        color: inherit;
+    }
+
+    .place-card:hover {
+        transform: translateY(-5px);
+    }
+
+    .place-card img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+    }
+
+    .place-content {
+        padding: 1rem;
+    }
+
+    .place-content h3 {
+        margin: 0 0 0.5rem;
+        color: #333;
+        font-size: 1.25rem;
+    }
+
+    .rating {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .rating .fa-star {
+        color: #ffd700;
+    }
+
+    .rating-text {
+        color: #666;
+        font-size: 0.9rem;
+    }
+
+    .place-meta {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+        margin-bottom: 0.75rem;
+        font-size: 0.9rem;
+        color: #666;
+    }
+
+    .place-meta p {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin: 0;
+    }
+
+    .place-meta i {
+        width: 16px;
+        color: #333;
+    }
+
+    .description {
+        font-size: 0.95rem;
+        line-height: 1.5;
+        color: #444;
+        margin: 0;
+    }
+
+    .no-places {
+        grid-column: 1 / -1;
+        text-align: center;
+        padding: 2rem;
+    }
+
+    .no-places .btn {
+        display: inline-block;
+        margin-top: 1rem;
+    }
+</style>
+{% endblock %}

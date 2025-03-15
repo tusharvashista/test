@@ -1,0 +1,296 @@
+{% extends 'wandercritic/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="my-places-container">
+    <div class="header">
+        {% if viewing_agent %}
+            <div class="agent-header">
+                <div class="agent-info">
+                    {% if viewing_agent.profile_picture %}
+                        <img src="{{ viewing_agent.profile_picture.url }}" alt="{{ viewing_agent.get_full_name }}" class="agent-pic">
+                    {% else %}
+                        <div class="agent-pic"><i class="fas fa-user-circle"></i></div>
+                    {% endif %}
+                    <div>
+                        <h1>Places by {{ viewing_agent.get_full_name }}</h1>
+                        {% if viewing_agent.company_name %}
+                            <p class="company-name">{{ viewing_agent.company_name }}</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <h1>My Places</h1>
+            <a href="{% url 'wandercritic:place_create' %}" class="btn btn-primary">
+                <i class="fas fa-plus"></i> Add New Place
+            </a>
+        {% endif %}
+    </div>
+
+    {% if messages %}
+    <div class="messages">
+        {% for message in messages %}
+        <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">
+            {{ message }}
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    {% if places %}
+        <div class="places-grid">
+            {% for place in places %}
+            <div class="place-card">
+                <div class="place-image">
+                    <img src="{{ place.image.url }}" alt="{{ place.name }}">
+                    <div class="place-actions">
+                        <a href="{% url 'wandercritic:place_edit' place.slug %}" class="btn-action edit">
+                            <i class="fas fa-edit"></i>
+                        </a>
+                        <a href="{% url 'wandercritic:place_detail' place.slug %}" class="btn-action view">
+                            <i class="fas fa-eye"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="place-info">
+                    <h2>{{ place.name }}</h2>
+                    <p class="location"><i class="fas fa-map-marker-alt"></i> {{ place.location }}</p>
+                    <p class="date">Posted on {{ place.created_at|date:"F j, Y" }}</p>
+                    <div class="stats">
+                        <span class="rating">
+                            <i class="fas fa-star"></i> {{ place.rating }}
+                        </span>
+                        <!-- Add more stats here if needed -->
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="no-places">
+            <div class="empty-state">
+                <i class="fas fa-map-marked-alt"></i>
+                <h2>No Places Yet</h2>
+                <p>Start sharing amazing destinations with travelers!</p>
+                <a href="{% url 'wandercritic:place_create' %}" class="btn btn-primary">Create Your First Post</a>
+            </div>
+        </div>
+    {% endif %}
+</div>
+
+<style>
+    .my-places-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 6rem 1rem 2rem;
+    }
+
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 2rem;
+    }
+
+    .header h1 {
+        margin: 0;
+        color: #333;
+        font-size: 2rem;
+    }
+
+    .places-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 2rem;
+    }
+
+    .place-card {
+        background: white;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        transition: transform 0.2s;
+    }
+
+    .place-card:hover {
+        transform: translateY(-4px);
+    }
+
+    .place-image {
+        position: relative;
+        padding-top: 66.67%;  /* 3:2 aspect ratio */
+        overflow: hidden;
+    }
+
+    .place-image img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .place-actions {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        display: flex;
+        gap: 0.5rem;
+        opacity: 0;
+        transition: opacity 0.2s;
+    }
+
+    .place-card:hover .place-actions {
+        opacity: 1;
+    }
+
+    .btn-action {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        background: rgba(0,0,0,0.6);
+        transition: background-color 0.2s;
+    }
+
+    .btn-action:hover {
+        background: rgba(0,0,0,0.8);
+    }
+
+    .btn-action.edit {
+        background: rgba(0, 123, 255, 0.8);
+    }
+
+    .btn-action.view {
+        background: rgba(40, 167, 69, 0.8);
+    }
+
+    .place-info {
+        padding: 1.5rem;
+    }
+
+    .place-info h2 {
+        margin: 0 0 0.5rem;
+        font-size: 1.25rem;
+        color: #333;
+    }
+
+    .location {
+        color: #666;
+        margin: 0 0 0.5rem;
+    }
+
+    .location i {
+        color: #dc3545;
+        margin-right: 0.25rem;
+    }
+
+    .date {
+        color: #888;
+        font-size: 0.9rem;
+        margin: 0 0 1rem;
+    }
+
+    .stats {
+        display: flex;
+        gap: 1rem;
+    }
+
+    .rating {
+        color: #ffc107;
+    }
+
+    .rating i {
+        margin-right: 0.25rem;
+    }
+
+    .no-places {
+        text-align: center;
+        padding: 4rem 0;
+    }
+
+    .empty-state {
+        max-width: 400px;
+        margin: 0 auto;
+    }
+
+    .empty-state i {
+        font-size: 4rem;
+        color: #6c757d;
+        margin-bottom: 1rem;
+    }
+
+    .empty-state h2 {
+        margin: 0 0 0.5rem;
+        color: #333;
+    }
+
+    .empty-state p {
+        color: #666;
+        margin: 0 0 1.5rem;
+    }
+
+    .messages {
+        margin-bottom: 2rem;
+    }
+
+    .alert {
+        padding: 1rem;
+        border-radius: 4px;
+        margin-bottom: 1rem;
+    }
+
+    .alert-success {
+        background-color: #d4edda;
+        color: #155724;
+    }
+
+    .alert-error {
+        background-color: #f8d7da;
+        color: #721c24;
+    }
+
+    .agent-header {
+        width: 100%;
+    }
+
+    .agent-info {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+    }
+
+    .agent-pic {
+        width: 64px;
+        height: 64px;
+        border-radius: 50%;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #e9ecef;
+    }
+
+    .agent-pic img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .agent-pic i {
+        font-size: 2.5rem;
+        color: #adb5bd;
+    }
+
+    .company-name {
+        color: #6c757d;
+        margin: 0.25rem 0 0;
+        font-size: 1.1rem;
+    }
+</style>
+{% endblock %}

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wander Critic - Look for the Right Place at Right Place!</title>
+    <link rel="stylesheet" href="{% static 'styles/main.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="{% url 'wandercritic:index' %}" class="logo">
+                <img src="{% static 'assets/Wander_Critic_logo.png' %}" alt="Wander Critic Logo">
+            </a>
+            <div class="nav-links">
+                <a href="{% url 'wandercritic:explore' %}">Explore</a>
+                {% if not user.is_superuser %}
+                    <a href="{% url 'wandercritic:about_us' %}">About Us</a>
+                    <a href="{% url 'wandercritic:contact_us' %}">Contact Us</a>
+                {% endif %}
+                {% if user.is_superuser %}
+                    <a href="{% url 'wandercritic:admin_applications' %}" class="btn btn-primary">Applications</a>
+                    <a href="{% url 'wandercritic:admin_reports' %}" class="btn btn-primary">View Reports</a>
+                {% elif user.is_travel_agent %}
+                    <a href="{% url 'wandercritic:place_create' %}" class="btn btn-primary">Post a Place</a>
+                    <a href="{% url 'wandercritic:my_places' %}" class="btn btn-primary">My Posts</a>
+                {% endif %}
+                {% if user.is_authenticated %}
+                    <div class="profile-dropdown">
+                        <button class="profile-button">
+                            {% if user.profile_picture %}
+                                <img src="{{ user.profile_picture.url }}" alt="Profile" class="profile-pic">
+                            {% else %}
+                                <i class="fas fa-user-circle"></i>
+                            {% endif %}
+                        </button>
+                        <div class="dropdown-content">
+                            <a href="{% url 'wandercritic:edit_profile' %}">
+                                <i class="fas fa-user-edit"></i> Edit Profile
+                            </a>
+                            <a href="{% url 'wandercritic:change_password' %}">
+                                <i class="fas fa-key"></i> Change Password
+                            </a>
+                            <a href="{% url 'account_logout' %}">
+                                <i class="fas fa-sign-out-alt"></i> Sign Out
+                            </a>
+                        </div>
+                    </div>
+                {% else %}
+                    <a href="{% url 'account_login' %}" class="btn btn-outline">Sign In</a>
+                    <a href="{% url 'account_signup' %}" class="btn btn-primary register">Register</a>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Pages</h3>
+                <ul>
+                    <li><a href="{% url 'wandercritic:about' %}">About Us</a></li>
+                    <li><a href="{% url 'wandercritic:contact' %}">Contact Us</a></li>
+                    {% if not user.is_authenticated %}
+                        <li><a href="{% url 'account_login' %}">Login</a></li>
+                        <li><a href="{% url 'account_signup' %}">Sign Up</a></li>
+                    {% endif %}
+                    {% if not user.is_superuser and user.is_authenticated %}
+                        <li><a href="{% url 'wandercritic:manage_reports' %}">My Reports</a></li>
+                        <li><a href="{% url 'wandercritic:report_bug' %}?url={{ request.build_absolute_uri }}">Report a bug</a></li>
+                    {% endif %}
+                    {% if not user.is_travel_agent and not user.is_superuser %}
+                        <li><a href="{% url 'wandercritic:become_agent' %}">Become a Travel Agent</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Explore</h3>
+                <ul>
+                    <li><a href="{% url 'wandercritic:explore' %}?category=Historic Castles %26 Palaces">Historic Castles & Palaces</a></li>
+                    <li><a href="{% url 'wandercritic:explore' %}?category=Highland Landscapes">Highland Landscapes</a></li>
+                    <li><a href="{% url 'wandercritic:explore' %}?category=Coastal %26 Islands">Coastal & Islands</a></li>
+                    <li><a href="{% url 'wandercritic:explore' %}?category=Cities %26 Urban">Cities & Urban</a></li>
+                    <li><a href="{% url 'wandercritic:explore' %}?category=Lochs %26 Waterways">Lochs & Waterways</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Policies</h3>
+                <ul>
+                    <li><a href="{% url 'wandercritic:policy' policy_type='review' %}">Review Policy</a></li>
+                    <li><a href="{% url 'wandercritic:policy' policy_type='user' %}">User Policy</a></li>
+                    <li><a href="{% url 'wandercritic:policy' policy_type='travel-agent' %}">Travel Agent Policy</a></li>
+                    <li><a href="{% url 'wandercritic:policy' policy_type='privacy' %}">Privacy & Data Policy</a></li>
+                </ul>
+
+            </div>
+        </div>
+    </footer>
+
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

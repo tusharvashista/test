@@ -1,0 +1,80 @@
+{% extends 'wandercritic/base.html' %}
+{% load static %}
+
+{% block content %}
+<main class="main-content">
+    <section class="about-section">
+        <div class="container">
+            <h1>About Wander Critic</h1>
+            <p class="lead">Discover Scotland's hidden gems through the eyes of locals and travelers.</p>
+            
+            <div class="about-grid">
+                <div class="about-card">
+                    <i class="fas fa-map-marked-alt"></i>
+                    <h3>Our Mission</h3>
+                    <p>To showcase the beauty of Scotland's landscapes, culture, and heritage while helping travelers make informed decisions about their next adventure.</p>
+                </div>
+                <div class="about-card">
+                    <i class="fas fa-users"></i>
+                    <h3>Community Driven</h3>
+                    <p>Built by travelers for travelers, our platform brings together authentic reviews and local insights to create meaningful travel experiences.</p>
+                </div>
+                <div class="about-card">
+                    <i class="fas fa-star"></i>
+                    <h3>Quality First</h3>
+                    <p>We verify all reviews and maintain high standards to ensure you get reliable and trustworthy information for your travels.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="about-section">
+        <div class="container">
+            <h2>Meet Our Team</h2>
+            <div class="team-grid">
+                <div class="team-member">
+                    <img src="{% static 'assets/Profile/Profile 1.jpeg' %}" alt="Team Member">
+                    <h3>Sarah MacLeod</h3>
+                    <p>Founder & CEO</p>
+                    <p>Travel enthusiast with 10+ years of experience in Scottish tourism.</p>
+                </div>
+                <div class="team-member">
+                    <img src="{% static 'assets/Profile/Profile 2.jpeg' %}" alt="Team Member">
+                    <h3>James Campbell</h3>
+                    <p>Head of Content</p>
+                    <p>Professional photographer and Highland native.</p>
+                </div>
+                <div class="team-member">
+                    <img src="{% static 'assets/Profile/Profile 3.jpeg' %}" alt="Team Member">
+                    <h3>Emma Stewart</h3>
+                    <p>Community Manager</p>
+                    <p>Expert in sustainable tourism and local experiences.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="about-section">
+        <div class="container">
+            <h2>Our Values</h2>
+            <div class="about-grid">
+                <div class="about-card">
+                    <i class="fas fa-leaf"></i>
+                    <h3>Sustainability</h3>
+                    <p>We promote responsible tourism and support local communities.</p>
+                </div>
+                <div class="about-card">
+                    <i class="fas fa-handshake"></i>
+                    <h3>Authenticity</h3>
+                    <p>Real reviews from real travelers, sharing genuine experiences.</p>
+                </div>
+                <div class="about-card">
+                    <i class="fas fa-heart"></i>
+                    <h3>Passion</h3>
+                    <p>We're passionate about showcasing Scotland's beauty to the world.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+{% endblock %}

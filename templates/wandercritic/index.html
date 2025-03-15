@@ -1,0 +1,315 @@
+{% extends 'wandercritic/base.html' %}
+{% load static %} 
+{% load account %}
+
+{% block content %}
+    <!-- Hero Section -->
+    <section class="hero" style="background-image: url('{% static "assets/Home_banner.jpeg" %}');">
+        <div class="hero-overlay">
+            <h1>Wander Critic</h1>
+            <p>Look for the Right Place at Right Place!</p>
+            <div class="hero-buttons">
+                <a href="{% url 'wandercritic:explore' %}" class="btn btn-primary">Explore</a>
+                {% if user.is_authenticated and not user.is_superuser %}
+                    <a href="{% url 'wandercritic:add_website_review' %}" class="btn btn-outline btn-light">Review Us</a>
+                {% elif not user.is_authenticated %}
+                    <a href="{% url 'account_signup' %}" class="btn btn-outline btn-light">Register</a>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+
+    <!-- Places Section -->
+    <section class="main-content">
+        <h2>Places to Visit this Season!</h2>
+        <div class="places-scroll-container">
+            <div class="places-scroll">
+                {% if places %}
+                    {% for place in places|slice:":5" %}
+                        <a href="{% url 'wandercritic:place_detail' place.slug %}" class="place-card">
+                            {% if place.image %}
+                                <img src="{{ place.image.url }}" alt="{{ place.name }}">
+                            {% else %}
+                                <img src="{% static 'assets/Landscape/AdobeStock_168532350_Preview.jpeg' %}" alt="Default Image">
+                            {% endif %}
+                            <div class="place-content">
+                                <h3>{{ place.name }}</h3>
+                                <div class="rating">
+                                    {% with ''|center:place.average_rating as stars %}
+                                        {% for _ in stars %}<i class="fas fa-star"></i>{% endfor %}
+                                    {% endwith %}
+                                    <span class="rating-text">{{ place.average_rating|floatformat:1 }}/5 ({{ place.total_ratings }} review{{ place.total_ratings|pluralize }})</span>
+                                </div>
+                                <div class="place-meta">
+                                    <p class="location"><i class="fas fa-map-marker-alt"></i> {{ place.location }}</p>
+                                    <p class="agent"><i class="fas fa-user"></i> {{ place.created_by.get_full_name }}</p>
+                                </div>
+                                <p class="description">{{ place.short_description }}</p>
+                            </div>
+                        </a>
+                    {% endfor %}
+                    <div class="explore-more">
+                        <a href="{% url 'wandercritic:explore' %}" class="explore-link">
+                            <div class="explore-content">
+                                <i class="fas fa-compass"></i>
+                                <span>Explore More</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </div>
+                        </a>
+                    </div>
+                {% else %}
+                    <div class="no-places">
+                        <p>No places available yet. Check back soon!</p>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials">
+        <div class="main-content">
+            <h2>Reviews</h2>
+            <p>What our community says about WanderCritic</p>
+            
+            <div class="testimonials-scroll">
+                {% if website_reviews %}
+                    {% for review in website_reviews|slice:":3" %}
+                        <div class="testimonial-card">
+                            <div class="testimonial-header">
+                                {% if review.user.profile_picture %}
+                                    <img src="{{ review.user.profile_picture.url }}" alt="{{ review.user.username }}">
+                                {% else %}
+                                    <img src="{% static 'assets/Profile/default.jpeg' %}" alt="Default Profile">
+                                {% endif %}
+                                <div>
+                                    <h4>{{ review.user.username }}</h4>
+                                    <p>{{ review.role }}</p>
+                                    <div class="rating">
+                                        {% with ''|center:review.rating as stars %}
+                                            {% for _ in stars %}★{% endfor %}
+                                        {% endwith %}
+                                        {{ review.rating }}/5
+                                    </div>
+                                </div>
+                                {% if user.is_superuser or user == review.user %}
+                                    <a href="{% url 'wandercritic:delete_website_review' review.id %}" 
+                                       class="delete-review" 
+                                       onclick="return confirm('Are you sure you want to delete this review?');">
+                                        <i class="fas fa-trash"></i>
+                                    </a>
+                                {% endif %}
+                            </div>
+                            <p>{{ review.content }}</p>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="no-reviews">
+                        <p>No reviews yet. Be the first to share your experience!</p>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+
+<style>
+    .places-scroll-container {
+        position: relative;
+        margin: 0 -1rem;
+        padding: 0 1rem;
+    }
+
+    .places-scroll {
+        display: flex;
+        overflow-x: auto;
+        gap: 2rem;
+        padding: 1rem 0;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;  /* Firefox */
+        -ms-overflow-style: none;  /* IE and Edge */
+    }
+
+    .places-scroll::-webkit-scrollbar {
+        display: none;  /* Chrome, Safari and Opera */
+    }
+
+    .place-card {
+        flex: 0 0 300px;
+        scroll-snap-align: start;
+        background: white;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        transition: transform 0.2s;
+        text-decoration: none;
+        color: inherit;
+    }
+
+    .place-card:hover {
+        transform: translateY(-4px);
+    }
+
+    .place-card img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+    }
+
+    .place-content {
+        padding: 1rem;
+    }
+
+    .place-content h3 {
+        margin: 0 0 0.5rem;
+        color: #333;
+        font-size: 1.25rem;
+    }
+
+    .rating {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .rating .fa-star {
+        color: #ffd700;
+    }
+
+    .rating-text {
+        color: #666;
+        font-size: 0.9rem;
+    }
+
+    .place-meta {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+        margin-bottom: 0.75rem;
+        font-size: 0.9rem;
+        color: #666;
+    }
+
+    .place-meta p {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin: 0;
+    }
+
+    .place-meta i {
+        width: 16px;
+        color: #333;
+    }
+
+    .description {
+        font-size: 0.95rem;
+        line-height: 1.5;
+        color: #444;
+        margin: 0;
+    }
+
+    .explore-more {
+        flex: 0 0 300px;
+        scroll-snap-align: start;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .explore-link {
+        text-decoration: none;
+        color: #007bff;
+        padding: 2rem;
+        border: 2px dashed #007bff;
+        border-radius: 8px;
+        transition: all 0.2s ease;
+    }
+
+    .explore-link:hover {
+        background: #007bff;
+        color: white;
+        border-style: solid;
+    }
+
+    .explore-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+        text-align: center;
+    }
+
+    .explore-content i {
+        font-size: 2rem;
+    }
+
+    .explore-content span {
+        font-size: 1.1rem;
+        font-weight: 500;
+    }
+
+    .testimonials-scroll {
+        display: flex;
+        overflow-x: auto;
+        gap: 2rem;
+        padding: 1rem 0;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+    }
+
+    .testimonials-scroll::-webkit-scrollbar {
+        display: none;
+    }
+
+    .testimonial-card {
+        flex: 0 0 350px;
+        scroll-snap-align: start;
+        background: white;
+        border-radius: 8px;
+        padding: 1.5rem;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        position: relative;
+    }
+
+    .testimonial-header {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 1rem;
+        position: relative;
+    }
+
+    .testimonial-header img {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+
+    .delete-review {
+        position: absolute;
+        top: 0;
+        right: 0;
+        color: #dc3545;
+        font-size: 1.2rem;
+        opacity: 0.7;
+        transition: opacity 0.2s;
+    }
+
+    .delete-review:hover {
+        opacity: 1;
+    }
+
+    .no-reviews {
+        flex: 1;
+        text-align: center;
+        padding: 2rem;
+        background: #f8f9fa;
+        border-radius: 8px;
+    }
+</style>
+{% endblock %}

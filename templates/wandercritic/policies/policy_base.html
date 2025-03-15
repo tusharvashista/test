@@ -1,0 +1,12 @@
+{% extends 'wandercritic/base.html' %}
+
+{% block content %}
+<div class="policy-container">
+    <div class="policy-header">
+        <h1>{% block policy_title %}{% endblock %}</h1>
+        <p>{% block policy_subtitle %}{% endblock %}</p>
+    </div>
+
+    {% block policy_content %}{% endblock %}
+</div>
+{% endblock %}

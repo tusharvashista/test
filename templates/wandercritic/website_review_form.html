@@ -1,0 +1,64 @@
+{% extends 'wandercritic/base.html' %}
+
+{% block content %}
+<div class="review-form-container">
+    <div class="form-container">
+        <h2>Review WanderCritic</h2>
+        <p>Share your experience with WanderCritic! Your feedback helps us improve.</p>
+        
+        <form method="post" class="form">
+            {% csrf_token %}
+            
+            <div class="form-group">
+                <label for="{{ form.rating.id_for_label }}">Rating:</label>
+                {{ form.rating }}
+            </div>
+
+            <div class="form-group">
+                <label for="{{ form.content.id_for_label }}">Your Review:</label>
+                {{ form.content }}
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit Review</button>
+        </form>
+    </div>
+</div>
+
+<style>
+    .review-form-container {
+        padding: 120px 20px 40px;
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .form-container {
+        background: white;
+        padding: 2rem;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+    }
+
+    .form-group select,
+    .form-group textarea {
+        width: 100%;
+        padding: 0.5rem;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 1rem;
+    }
+
+    .form-group textarea {
+        min-height: 150px;
+    }
+</style>
+{% endblock %}

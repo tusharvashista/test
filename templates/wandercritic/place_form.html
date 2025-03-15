@@ -1,0 +1,215 @@
+{% extends 'wandercritic/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="place-form-container">
+    <h1>{% if form.instance.pk %}Edit{% else %}Create New{% endif %} Place</h1>
+    
+    <form method="post" enctype="multipart/form-data" class="place-form">
+        {% csrf_token %}
+        
+        <div class="form-group">
+            <label for="{{ form.name.id_for_label }}">Name</label>
+            {{ form.name }}
+            {% if form.name.errors %}
+                <div class="error">{{ form.name.errors }}</div>
+            {% endif %}
+        </div>
+
+        <div class="form-group">
+            <label for="{{ form.short_description.id_for_label }}">Short Description</label>
+            {{ form.short_description }}
+            {% if form.short_description.errors %}
+                <div class="error">{{ form.short_description.errors }}</div>
+            {% endif %}
+        </div>
+
+        <div class="form-group">
+            <label for="{{ form.description.id_for_label }}">Full Description</label>
+            {{ form.description }}
+            {% if form.description.errors %}
+                <div class="error">{{ form.description.errors }}</div>
+            {% endif %}
+        </div>
+
+        <div class="form-group">
+            <label for="{{ form.location.id_for_label }}">Location</label>
+            {{ form.location }}
+            {% if form.location.errors %}
+                <div class="error">{{ form.location.errors }}</div>
+            {% endif %}
+        </div>
+
+        <div class="form-group">
+            <label for="{{ form.image.id_for_label }}">Main Image</label>
+            {{ form.image }}
+            {% if form.image.errors %}
+                <div class="error">{{ form.image.errors }}</div>
+            {% endif %}
+        </div>
+
+        <div class="form-group">
+            <label for="{{ form.history.id_for_label }}">History</label>
+            {{ form.history }}
+            {% if form.history.errors %}
+                <div class="error">{{ form.history.errors }}</div>
+            {% endif %}
+        </div>
+
+        <div class="form-group">
+            <label for="{{ form.highlights.id_for_label }}">Highlights</label>
+            {{ form.highlights }}
+            <small class="help-text">{{ form.highlights.help_text }}</small>
+            {% if form.highlights.errors %}
+                <div class="error">{{ form.highlights.errors }}</div>
+            {% endif %}
+        </div>
+
+        <div class="form-group">
+            <label for="{{ form.best_time_to_visit.id_for_label }}">Best Time to Visit</label>
+            {{ form.best_time_to_visit }}
+            {% if form.best_time_to_visit.errors %}
+                <div class="error">{{ form.best_time_to_visit.errors }}</div>
+            {% endif %}
+        </div>
+
+        <div class="form-group">
+            <label for="{{ form.getting_there.id_for_label }}">Getting There</label>
+            {{ form.getting_there }}
+            {% if form.getting_there.errors %}
+                <div class="error">{{ form.getting_there.errors }}</div>
+            {% endif %}
+        </div>
+
+        <div class="form-group">
+            <label for="{{ form.tips.id_for_label }}">Travel Tips</label>
+            {{ form.tips }}
+            <small class="help-text">{{ form.tips.help_text }}</small>
+            {% if form.tips.errors %}
+                <div class="error">{{ form.tips.errors }}</div>
+            {% endif %}
+        </div>
+
+        <div class="form-group">
+            <label for="{{ form.categories.id_for_label }}">Categories</label>
+            {{ form.categories }}
+            {% if form.categories.errors %}
+                <div class="error">{{ form.categories.errors }}</div>
+            {% endif %}
+        </div>
+
+        <div class="form-group">
+            <label for="{{ form.tags.id_for_label }}">Tags</label>
+            {{ form.tags }}
+            {% if form.tags.errors %}
+                <div class="error">{{ form.tags.errors }}</div>
+            {% endif %}
+        </div>
+
+        <div class="form-group">
+            <label for="{{ form.budget.id_for_label }}">Estimated Budget (£)</label>
+            {{ form.budget }}
+            <small class="help-text">{{ form.budget.help_text }}</small>
+            {% if form.budget.errors %}
+                <div class="error">{{ form.budget.errors }}</div>
+            {% endif %}
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">
+                {% if form.instance.pk %}Update{% else %}Create{% endif %} Place
+            </button>
+            <a href="{% url 'wandercritic:explore' %}" class="btn btn-secondary">Cancel</a>
+        </div>
+    </form>
+</div>
+
+<style>
+    .place-form-container {
+        max-width: 800px;
+        margin: 7rem auto 2rem;
+        padding: 2rem;
+        background: #fff;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+        margin: 0 0 2rem;
+        color: #333;
+        font-size: 2rem;
+    }
+
+    .place-form {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .form-group label {
+        font-weight: 600;
+        color: #333;
+    }
+
+    .form-group input[type="text"],
+    .form-group input[type="url"],
+    .form-group textarea,
+    .form-group select {
+        padding: 0.5rem;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 1rem;
+    }
+
+    .form-group textarea {
+        min-height: 150px;
+    }
+
+    .help-text {
+        color: #666;
+        font-size: 0.9rem;
+    }
+
+    .error {
+        color: #dc3545;
+        font-size: 0.9rem;
+        margin-top: 0.25rem;
+    }
+
+    .form-actions {
+        display: flex;
+        gap: 1rem;
+        margin-top: 1rem;
+    }
+
+    .btn {
+        padding: 0.5rem 1rem;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 1rem;
+        transition: background-color 0.2s;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        color: white;
+    }
+
+    .btn-secondary {
+        background-color: #6c757d;
+        color: white;
+        text-decoration: none;
+    }
+
+    .btn:hover {
+        opacity: 0.9;
+    }
+</style>
+{% endblock %}

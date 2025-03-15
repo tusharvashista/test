@@ -1,0 +1,188 @@
+{% extends 'wandercritic/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="admin-container">
+    <h1>Travel Agent Applications</h1>
+
+    {% if applications %}
+        <div class="applications-list">
+            {% for application in applications %}
+            <div class="application-card">
+                <div class="application-header">
+                    <h2>{{ application.full_name }}</h2>
+                    <span class="date">Applied on: {{ application.created_at|date:"F j, Y" }}</span>
+                </div>
+
+                {% if application.company_name %}
+                <div class="company">
+                    <strong>Company:</strong> {{ application.company_name }}
+                </div>
+                {% endif %}
+
+                <div class="contact-info">
+                    <div><strong>Email:</strong> {{ application.user.email }}</div>
+                    <div><strong>Phone:</strong> {{ application.phone }}</div>
+                    {% if application.website %}
+                    <div><strong>Website:</strong> <a href="{{ application.website }}" target="_blank">{{ application.website }}</a></div>
+                    {% endif %}
+                </div>
+
+                <div class="experience">
+                    <h3>Experience</h3>
+                    <p>{{ application.experience|linebreaks }}</p>
+                </div>
+
+                <div class="action-buttons">
+                    <form method="post" action="{% url 'wandercritic:admin_application_action' application.id 'approve' %}" style="display: inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-success">Approve</button>
+                    </form>
+                    <form method="post" action="{% url 'wandercritic:admin_application_action' application.id 'reject' %}" style="display: inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger">Reject</button>
+                    </form>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="no-applications">
+            <p>No pending applications at this time.</p>
+        </div>
+    {% endif %}
+</div>
+
+<style>
+    .admin-container {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 6rem 1rem 2rem;
+    }
+
+    .admin-container h1 {
+        margin-bottom: 2rem;
+        color: #333;
+        text-align: center;
+        font-size: 2rem;
+    }
+
+    .applications-list {
+        display: grid;
+        gap: 1.5rem;
+    }
+
+    .application-card {
+        background: white;
+        padding: 1.5rem;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .application-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1rem;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid #eee;
+    }
+
+    .application-header h2 {
+        margin: 0;
+        color: #333;
+        font-size: 1.5rem;
+    }
+
+    .date {
+        color: #666;
+        font-size: 0.9rem;
+    }
+
+    .company {
+        margin-bottom: 1rem;
+        color: #444;
+    }
+
+    .contact-info {
+        display: grid;
+        gap: 0.5rem;
+        margin-bottom: 1.5rem;
+        color: #555;
+    }
+
+    .experience {
+        margin-bottom: 1.5rem;
+    }
+
+    .experience h3 {
+        color: #333;
+        margin-bottom: 0.5rem;
+    }
+
+    .experience p {
+        color: #666;
+        line-height: 1.6;
+    }
+
+    .action-buttons {
+        display: flex;
+        gap: 1rem;
+        margin-top: 1rem;
+        padding-top: 1rem;
+        border-top: 1px solid #eee;
+    }
+
+    .btn {
+        padding: 0.5rem 1.5rem;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 1rem;
+        transition: opacity 0.2s;
+    }
+
+    .btn:hover {
+        opacity: 0.9;
+    }
+
+    .btn-success {
+        background-color: #28a745;
+        color: white;
+    }
+
+    .btn-danger {
+        background-color: #dc3545;
+        color: white;
+    }
+
+    .no-applications {
+        text-align: center;
+        padding: 3rem;
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        color: #666;
+    }
+
+    .messages {
+        margin-bottom: 2rem;
+    }
+
+    .alert {
+        padding: 1rem;
+        border-radius: 4px;
+        margin-bottom: 1rem;
+    }
+
+    .alert-success {
+        background-color: #d4edda;
+        color: #155724;
+    }
+
+    .alert-error {
+        background-color: #f8d7da;
+        color: #721c24;
+    }
+</style>
+{% endblock %}
